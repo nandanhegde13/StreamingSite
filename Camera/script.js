@@ -4,6 +4,7 @@ let recordBtn  = document.querySelector(".record-btn");
 let captureBtnCont = document.querySelector(".capture-btn-cont");
 let captureBtn = document.querySelector(".capture-btn");
 let recordFlag  =false;
+let transparentColor="transparent";
 let chunks=[];
 
 let recorder;
@@ -23,10 +24,12 @@ navigator.mediaDevices.getUserMedia(constraints)
 
      })
 
+
      recorder.addEventListener("dataavailable",(e) => 
      {
         chunks.push(e.data);
      })
+
 
      recorder.addEventListener("stop",(e)=>
      {
@@ -61,6 +64,25 @@ recordBtnCont.addEventListener("click", (e)=> {
 
 })
 
+captureBtnCont.addEventListener("click",(e)=>{
+    let canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    let tool = canvas.getContext("2d");
+    tool.drawImage(video,0,0,canvas.width,canvas.height);
+
+    //Filtering
+    tool.fillStyle = transparentColor;
+    tool.fillRect(0,0,canvas.width,canvas.height);
+
+    let imageURL= canvas.toDataURL();
+    let a = document.createElement("a");
+    a.href = imageURL;
+    a.download = "image.jpg";
+    a.click();
+})
+
 
 let timerId;
 let timer = document.querySelector(".timer")
@@ -76,15 +98,15 @@ function startTimer(){
        totalSeconds = totalSeconds % 3600;
 
        let minutes = Number.parseInt(totalSeconds/60);
-       totalSeconds = totalSeconds%60;
+       totalSeconds = totalSeconds % 60;
 
        let seconds = totalSeconds;
 
-       hours = ( hours<10 ) ? '0${hours}': hours;
-       minutes = ( minutes<10 ) ? '0${minutes}': minutes;
-       hours = ( seconds<10 ) ? '0${seconds}': seconds;
+       hours = ( hours < 10 ) ? `0${hours}`: hours;
+       minutes = ( minutes < 10 ) ? `0${minutes}`: minutes;
+       seconds = ( seconds < 10 ) ? `0${seconds}`: seconds;
 
-       timer.innerText = '${hours}:${minutes}:${seconds}';
+       timer.innerText = `${hours}:${minutes}:${seconds}`;
 
        counter++;
 
@@ -99,3 +121,21 @@ function stopTimer(){
     timer.innerText = "00:00:00";
     timer.style.display = "none";
 }
+
+
+//filtering logic
+
+let allFilters = document.querySelectorAll(".filter");
+let filterLayer = document.querySelector(".filter-layer");
+allFilters.forEach((filterElem)=> {
+    filterElem.addEventListener("click",(e)=>{
+        
+      transparentColor = getComputedStyle(filterElem).getPropertyValue("background-color");
+      filterLayer.style.BackgroundColor = transparentColor
+        
+
+    })
+})
+
+
+
