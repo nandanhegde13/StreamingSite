@@ -1,0 +1,49 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:0;
+
+}
+
+.back{
+    width:5rem;
+    height:5rem;
+    border-radius:50%;
+    color:white;
+    background-color:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:fixed;
+    bottom:4rem;
+    right:5rem;
+}
+
+.back:hover{
+    cursor:pointer;
+}
+
+.gallery-cont{
+    background-color:lightblue;
+    height:100vh;
+    width:100vw;
+}
+
+.media-cont{
+    height:15rem;
+    width:15rem;
+    border:10px solid white;
+    background-color:lightgreen;
+
+}
+
+.download{
+    height:2reml
+    background-color:black;
+
+}
+
+.delete
