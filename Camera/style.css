@@ -34,7 +34,7 @@ video{
     color:black;
     flex-direction:column; 
     justify-content: space-between;
-    z-index:5;
+    z-index:2;
 
 }
 
@@ -142,7 +142,7 @@ border-radius:50%;
 }
 
 .pink{
-    background-color: #ffc0cba9;
+    background-color: #ffc0cb57;
 }
 
 .transparent {
@@ -155,9 +155,27 @@ border-radius:50%;
     left:0;
     height:100vh;
     width:100vw;
+    
     z-index:1;
 
 }
+
+.material-icons {
+    color:white;
+    font-size:3rem;
+}
+
+.gallery{
+    position:absolute;
+    right:6.7rem;
+    bottom:7rem;
+    z-index:2;
+}
+
+.gallery:hover{
+    cursor:pointer;
+}
+
 
 
 
